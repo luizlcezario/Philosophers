@@ -1,1 +1,8 @@
 # Philosophers
+In computer science, The Dining Philosopher Problem is an example problem often used in concurrent algorithm design to illustrate synchronization issues and techniques for resolving them.
+
+## What is Philosophers?
+Philosophers is an individual project at 42 that requires us to solve The Dining Philosopher Problem problem using threads, processes, mutex and semaphores. The mandatory part must be solved using threads and mutex. The solution was implemented using a monitoring thread, which checks if any philosopher has died and warns others to stop (locking mutex). The bonus consists of using processes instead of threads and semaphores instead of mutex, to solve it the solution used was to implement the death check between the sleeping times, avoiding the problem of reporting the death of a philosopher with more than 10ms.
+
+## Problem statement
+The problem was proposed by Edsger W. Dijkstra in 1965 and is considered one of the classic problems about operating systems. The problem consists of five philosophers sitting around a circular dinner table, where each philosopher has a plate for eating spaghetti and a fork to his right. To eat they need 2 forks but there is only one fork between each pair of plates. A philosopher has three actions: eating, thinking, or sleeping. When a philosopher gets hungry he will try to take the fork to his right and to his left, one at a time. If he manages to get both forks, he will eat the food at a certain time and will put the forks on the table, going to sleep and then going to think again.

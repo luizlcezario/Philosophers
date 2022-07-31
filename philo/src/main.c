@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/29 21:59:09 by llima-ce          #+#    #+#             */
+/*   Updated: 2022/07/30 19:42:41 by llima-ce         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philosophers.h"
+
+int	main(int argc, char **argv)
+{
+	t_philosophers	game;
+
+	if(argc < 5 && argc > 7)
+	{
+		init_philosophizing(&phil, argc, argv);
+		return (0);
+	}
+	else
+		perror("\033[0;31mError: wrong arguments\n\033[0;30m");
+	return (1);
+}
