@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/07/30 20:02:40 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:31:46 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct table {
 }	t_table;
 
 typedef struct philosophers {
+	args_t			*args;
+	int				eats;
 	phtread_t		*threads;
 }	t_philosophers;
 
@@ -69,8 +71,8 @@ typedef struct philosophizing {
 	args_t			args;
 	philosophers_t	*philo;
 	table_t			*table;
+	long long		time_start;
 }	t_philosophizing;
-
 
 /**
  * @brief init struct to pass as arguments to the threads.
@@ -80,5 +82,12 @@ typedef struct philosophizing {
  * @param argc num	of arguments of the program.
  */
 void	init_philosophizing(philosophizing_t *game, char **argv, int argc);
+
+/**
+ * @brief 
+ * 
+ * @param game 
+ */
+void	start_philo(t_philosophizing game);
 
 #endif // PHILOSOPHERS_H
