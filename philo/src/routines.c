@@ -12,6 +12,11 @@
 
 #include "philosophers.h"
 
-void	*routines(char *void) {
+
+
+void	*routines(t_philosophizing *game) {
 	
+	pthread_mutex_init
+	
+	return(NULL);
 }

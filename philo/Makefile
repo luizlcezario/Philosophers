@@ -1,11 +1,11 @@
 NAME = philo
-CC = clang
+CC = gcc
 INCLUDE = -I include
 CFLAGS = -Wall -Werror -Wextra
-SRC = init_philo.c main.c philo.c
+SRC = init_philo.c main.c philo.c utils.c routines.c
 SOURCE = $(addprefix src/, $(SRC))
-OBJ = $(SOURCE:.c=.o)
 OBJDIR = obj/
+OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
@@ -14,7 +14,7 @@ $(NAME): $(OBJ)
 
 $(OBJ): $(OBJDIR) $(SOURCE)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $(SOURCE)
-	mv $(OBJ) $(OBJDIR)
+	mv $(notdir ,$(OBJ)) $(OBJDIR)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)

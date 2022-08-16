@@ -14,11 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_philosophers	game;
+	t_philosophizing	game;
 
 	if(argc < 5 && argc > 7)
 	{
-		init_philosophizing(&phil, argc, argv);
+		init_philosophizing(&game, argv, argc);
+		start_philo(&game);
 		return (0);
 	}
 	else

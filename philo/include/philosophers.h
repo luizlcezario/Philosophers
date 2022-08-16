@@ -56,21 +56,19 @@ typedef struct args
 	int	t_eat_end;
 }		t_args;
 
-typedef struct table {
-	t_mutex			*m_forks;
-	int				forks;
-}	t_table;
-
 typedef struct philosophers {
-	args_t			*args;
+	t_mutex			**m_forks;
+	t_args			*args;
 	int				eats;
-	phtread_t		*threads;
+	int				index;
+	long long		last_eat;
 }	t_philosophers;
 
 typedef struct philosophizing {
-	args_t			args;
-	philosophers_t	*philo;
-	table_t			*table;
+	t_mutex			**m_forks;
+	pthread_t		**threads;
+	t_philosophers	**philo;
+	t_args			args;
 	long long		time_start;
 }	t_philosophizing;
 
@@ -81,13 +79,15 @@ typedef struct philosophizing {
  * @param argv arguments of the program.
  * @param argc num	of arguments of the program.
  */
-void	init_philosophizing(philosophizing_t *game, char **argv, int argc);
+void	init_philosophizing(t_philosophizing *game, char **argv, int argc);
 
 /**
  * @brief 
  * 
  * @param game 
  */
-void	start_philo(t_philosophizing game);
+void	start_philo(t_philosophizing *game);
 
+
+long long current_timestamp();
 #endif // PHILOSOPHERS_H
