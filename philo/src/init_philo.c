@@ -14,6 +14,8 @@
 
 static void	init_args(t_philosophizing *game, char **argv, int argc)
 {
+	game->args.start = current_timestamp();
+	game->args.died = 0;
 	game->args.num_philo = atoi(argv[1]);
 	game->args.t_die = atoi(argv[2]);
 	game->args.t_eat = atoi(argv[3]);
@@ -28,11 +30,12 @@ static void	init_args(t_philosophizing *game, char **argv, int argc)
 	}
 }
 
-void init(t_philosophizing *game) {
+void	init_philos(t_philosophizing *game) {
 	int	a;
 
 	a = 0;
 	while (a < game->args.num_philo) {
+		game->philo[a]->action = THINK;
 		game->philo[a]->args = &game->args;
 		game->philo[a]->index = a;
 		game->philo[a]->eats = 0;
@@ -52,18 +55,19 @@ void	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 {
 	int	a;
 
-	a = 0;
+	a = -1;
 	init_args(game, argv, argc);
-	game->time_start = current_timestamp();
 	game->philo = malloc((game->args.num_philo) * sizeof(t_philosophers *));
 	game->m_forks = malloc(game->args.num_philo * sizeof(t_mutex *));
 	game->threads = malloc(game->args.num_philo * sizeof(pthread_t *));
-	while (a < game->args.num_philo) {
+	while (++a < game->args.num_philo) {
 		game->threads[a] = malloc(sizeof(pthread_t));
 		game->philo[a] = malloc(sizeof(t_philosophers));
 		game->m_forks[a] = malloc(sizeof(t_mutex));
-		a++;
 	}
+	a = -1;
+	while(++a < game->args.num_philo)
+		pthread_mutex_init(game->m_forks[a], NULL);
 	game->threads = malloc(game->args.num_philo * sizeof(pthread_t));
-	init(game);
+	init_philos(game);
 }

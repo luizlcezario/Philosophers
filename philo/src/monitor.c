@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/09 18:27:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/09 18:30:07 by llima-ce         ###   ########.fr       */
+/*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
+/*   Updated: 2022/08/16 20:16:40 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long	current_timestamp() {
-	struct timeval te;
-	gettimeofday(&te, NULL); // get current time.
-	long long milliseconds = te.tv_sec * 1000LL + te.tv_usec / 1000;
-	return milliseconds;
-}
-
-void	msslep(long long mile)
+void	*monitor_routine(void *tmp)
 {
-	long long	microsec;
+	t_philosophers **philos;
 
-	microsec = mile * 1000;
-	usleep(microseconds);
+	philos = (t_philosophers **)tmp;
+	while ()
 }

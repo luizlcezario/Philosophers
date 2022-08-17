@@ -47,13 +47,20 @@ typedef pthread_mutex_t	t_mutex;
  * 
  */
 
+# define DIE 0;
+# define THINK 1;
+# define EAT 2;
+# define SLEEP 3;
+
 typedef struct args
 {
-	int	num_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	t_eat_end;
+	int				died;
+	int				num_philo;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				t_eat_end;
+	long long		start;
 }		t_args;
 
 typedef struct philosophers {
@@ -61,6 +68,7 @@ typedef struct philosophers {
 	t_args			*args;
 	int				eats;
 	int				index;
+	int				action;
 	long long		last_eat;
 }	t_philosophers;
 
@@ -69,7 +77,6 @@ typedef struct philosophizing {
 	pthread_t		**threads;
 	t_philosophers	**philo;
 	t_args			args;
-	long long		time_start;
 }	t_philosophizing;
 
 /**
@@ -87,7 +94,7 @@ void	init_philosophizing(t_philosophizing *game, char **argv, int argc);
  * @param game 
  */
 void	start_philo(t_philosophizing *game);
-
-
+void	*routines(void *game);
+void	msslep(long long mile);
 long long current_timestamp();
 #endif // PHILOSOPHERS_H
