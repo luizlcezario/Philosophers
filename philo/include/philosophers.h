@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/09 18:31:46 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:30:53 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void	init_philosophizing(t_philosophizing *game, char **argv, int argc);
  */
 void	start_philo(t_philosophizing *game);
 void	*routines(void *game);
-void	msslep(long long mile);
+void	mssleep(long long mile);
 long long current_timestamp();
 #endif // PHILOSOPHERS_H

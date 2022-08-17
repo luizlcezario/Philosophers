@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:27:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/09 18:30:07 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:30:48 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long long	current_timestamp() {
 	return milliseconds;
 }
 
-void	msslep(long long mile)
+void	mssleep(long long mile)
 {
 	long long	microsec;
 
