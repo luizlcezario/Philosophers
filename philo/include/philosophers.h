@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/26 20:26:39 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/26 23:39:02 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef pthread_mutex_t	t_mutex;
 # define EAT 2
 # define SLEEP 3
 # define FORK 4 
+# define DINNER_OVER 5
 
 typedef struct s_args
 {
@@ -67,6 +68,7 @@ typedef struct s_args
 }		t_args;
 
 typedef struct s_philosophers {
+	pthread_t		thread;
 	t_mutex			**m_forks;
 	t_args			*args;
 	int				eats;
@@ -76,7 +78,6 @@ typedef struct s_philosophers {
 
 typedef struct s_philosophizing {
 	t_mutex			**m_forks;
-	pthread_t		**threads;
 	t_philosophers	**philo;
 	t_args			args;
 }	t_philosophizing;
@@ -95,5 +96,5 @@ void		*routines(void *game);
 void		mssleep(long long mile);
 void		*monitor_routine(void *tmp);
 long long	current_timestamp();
-void	print_action(int action, t_philosophers *philo);
+void		print_action(int action, t_philosophers *philo);
 #endif // PHILOSOPHERS_H
