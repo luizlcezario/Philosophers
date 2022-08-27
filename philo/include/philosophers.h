@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/27 00:23:13 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:00:07 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ typedef struct s_args
 	int				t_eat;
 	int				t_sleep;
 	int				t_eat_end;
-	int				num_not_satifyed;
 	long long		start;
-	t_mutex			lock_eat;
 	int				died;
+	// t_mutex			lock_eat;
 }		t_args;
 
 typedef struct s_philosophers {

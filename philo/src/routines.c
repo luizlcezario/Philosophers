@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/27 00:09:03 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:33:55 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	*routines(void *tmp)
 
 	philo = (t_philosophers *)tmp;
 	if ((philo->index % 2) == 1)
-		usleep(1500);
+		usleep(1000);
 	while (end_dinner(philo) == 0)
 	{
 		if (!try_eat(philo) && end_dinner(philo))

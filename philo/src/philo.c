@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:39:51 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/26 23:07:32 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:07:12 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	start_philo(t_philosophizing *game)
 		pthread_create(&game->philo[a]->thread, NULL, &routines,
 			(void *)game->philo[a]);
 	}
-	pthread_create(&monitor, NULL, &monitor_routine, (void *)&game->philo);
+	pthread_create(&monitor, NULL, &monitor_routine, (void *)game->philo);
 	a = -1;
 	while(++a < game->args.num_philo)
 		pthread_join(game->philo[a]->thread, NULL);

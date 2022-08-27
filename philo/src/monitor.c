@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/27 00:22:45 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:10:16 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,27 @@ void	*monitor_routine(void *tmp)
 	t_philosophers **monitor;
 	t_args			*args;
 	int				a;
+	int				num_not_satifyed;
 
-	a = -1;
+
 	monitor = (t_philosophers **)tmp;
 	args = monitor[0]->args;
-	printf("%d\n", args->died);
-	while (args->died == 0 && args->num_not_satifyed != 0) {
-		while (a < args->num_philo) {
-			if ((current_timestamp() - args->start) - monitor[a]->last_eat >
-				args->t_die)
-			{
-				print_action(DIE, monitor[a]);
-				args->died = 1;
-			}
-			if (monitor[a]->eats == args->t_eat_end)
-				args->num_not_satifyed--;
-			if (args->num_not_satifyed == 0)
-			{
-				print_action(DINNER_OVER, monitor[a]);
-				break ;
-			}
+	num_not_satifyed = args->num_philo;
+	while (args->died == 0 && num_not_satifyed != 0) {
+		if (a < 0 || a > args->num_philo - 1)
+			a = 0;
+		if ((current_timestamp() - args->start) - monitor[a]->last_eat >
+			args->t_die)
+		{
+			print_action(DIE, monitor[a]);
+			args->died = 1;
 		}
+		if (monitor[a]->eats == args->t_eat_end)
+			num_not_satifyed--;
+		a++;
 	}
+	printf("%d\n", num_not_satifyed );
+	if (num_not_satifyed == 0)
+		print_action(DINNER_OVER, monitor[a]);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/27 00:23:39 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:01:15 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_args(t_philosophizing *game, char **argv, int argc)
 		printf("Error: number of philosophers must be greater than 0\n");
 		exit(1);
 	}
-	game->args.num_not_satifyed = game->args.num_philo - 1;
+	// game->args.num_not_satifyed = game->args.num_philo;
 	game->args.died = 0;
 }
 
