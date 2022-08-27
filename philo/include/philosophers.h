@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/17 18:30:53 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/26 20:26:39 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,34 @@ typedef pthread_mutex_t	t_mutex;
  * 
  */
 
-# define DIE 0;
-# define THINK 1;
-# define EAT 2;
-# define SLEEP 3;
+# define DIE 0
+# define THINK 1
+# define EAT 2
+# define SLEEP 3
+# define FORK 4 
 
-typedef struct args
+typedef struct s_args
 {
-	int				died;
 	int				num_philo;
 	int				t_die;
 	int				t_eat;
 	int				t_sleep;
 	int				t_eat_end;
+	int				num_not_satifyed;
 	long long		start;
+	t_mutex			lock_eat;
+	int				died;
 }		t_args;
 
-typedef struct philosophers {
+typedef struct s_philosophers {
 	t_mutex			**m_forks;
 	t_args			*args;
 	int				eats;
 	int				index;
-	int				action;
 	long long		last_eat;
 }	t_philosophers;
 
-typedef struct philosophizing {
+typedef struct s_philosophizing {
 	t_mutex			**m_forks;
 	pthread_t		**threads;
 	t_philosophers	**philo;
@@ -88,13 +90,10 @@ typedef struct philosophizing {
  */
 void	init_philosophizing(t_philosophizing *game, char **argv, int argc);
 
-/**
- * @brief 
- * 
- * @param game 
- */
-void	start_philo(t_philosophizing *game);
-void	*routines(void *game);
-void	mssleep(long long mile);
-long long current_timestamp();
+void		start_philo(t_philosophizing *game);
+void		*routines(void *game);
+void		mssleep(long long mile);
+void		*monitor_routine(void *tmp);
+long long	current_timestamp();
+void	print_action(int action, t_philosophers *philo);
 #endif // PHILOSOPHERS_H

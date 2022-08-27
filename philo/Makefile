@@ -2,7 +2,7 @@ NAME = philo
 CC = gcc
 INCLUDE = -I include
 CFLAGS = -Wall -Werror -Wextra
-SRC = init_philo.c main.c philo.c utils.c routines.c
+SRC = init_philo.c main.c philo.c utils.c monitor.c routines.c
 SOURCE = $(addprefix src/, $(SRC))
 OBJDIR = obj/
 OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))
@@ -18,6 +18,9 @@ $(OBJ): $(OBJDIR) $(SOURCE)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
+
+test:
+	./$(NAME) 5 1000 200 300 5
 
 clean:
 	rm -rf $(OBJDIR)

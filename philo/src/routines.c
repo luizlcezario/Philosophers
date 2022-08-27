@@ -6,26 +6,34 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/17 18:37:58 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:48:29 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	try_eat(t_philosophers *philo)
+static int	end_dinner(t_philosophers *philo)
 {
-	long long	time;
+	if (philo->args->died != 0) 
+		return (DIE);
+	if (philo->eats == philo->args->t_eat_end) 
+	{
+		philo->args->num_not_satifyed--;
+		return (EAT);
+	}
+	return (0);
+}
 
+static int	try_eat(t_philosophers *philo)
+{
 	pthread_mutex_lock(philo->m_forks[0]);
 	pthread_mutex_lock(philo->m_forks[1]);
 	if (end_dinner(philo)) {
 		return (0);
 	}
-	time = current_timestamp() - philo->args->start;
-	printf("%lli %i has taken a fork\n", time, philo->index + 1);
-	printf("%lli %i has taken a fork\n", time, philo->index + 1);
-	printf("%lli %i is eating\n", time, philo->index + 1);
-	philo->action = EAT;
+	print_action(FORK, philo);
+	print_action(FORK, philo);
+	print_action(EAT, philo);
 	philo->eats++;
 	mssleep(philo->args->t_eat);
 	pthread_mutex_unlock(philo->m_forks[1]);
@@ -33,45 +41,30 @@ int	try_eat(t_philosophers *philo)
 	return(1);
 }
 
-void	sleep(t_philosophers *philo)
+static void	philo_sleep(t_philosophers *philo)
 {
-	long long time;
-
-	time = current_timestamp() - philo->args->start;
-	printf("%lli %i is sleeping\n", time, philo->index + 1);
-	philo->action = SLEEP;
+	print_action(SLEEP, philo);
 	mssleep(philo->args->t_sleep);
+	philo->last_eat = current_timestamp() - philo->args->start;
 }
 
 void	think(t_philosophers *philo) {
-	long long time;
-
-	time = current_timestamp() - philo->args->start;
-	philo->action = THINK;
-	printf("%lli %i is thinking\n", time, philo->index + 1);
-	usleep(20);
-}
-
-int	end_dinner(t_philosophers *philo)
-{
-	if (philo->args->died != 0) 
-		return (DIE);
-	if (philo->eats == philo->args->t_eat_end)
-		return (EAT);
-	return (0);
+	print_action(THINK, philo);
+	usleep(200);
 }
 
 void	*routines(void *tmp)
 {
-	philosophers *philo;
+	t_philosophers *philo;
 
 	philo = (t_philosophers *)tmp;
+	printf("ok %d\n", philo->index);
 	if (philo->index % 2 != 0)
-		usleep(10);
+		usleep(1000);
 	while (end_dinner(philo))
 	{
 		if (!try_eat(philo) && end_dinner(philo))
-			sleep(philo);
+			philo_sleep(philo);
 		if (end_dinner(philo) == DIE)
 			break ;
 		think(philo);

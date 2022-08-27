@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/17 18:28:44 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:32:00 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	init_args(t_philosophizing *game, char **argv, int argc)
 {
-	game->args.start = current_timestamp();
-	game->args.died = 0;
 	game->args.num_philo = atoi(argv[1]);
 	game->args.t_die = atoi(argv[2]);
 	game->args.t_eat = atoi(argv[3]);
@@ -28,6 +26,8 @@ static void	init_args(t_philosophizing *game, char **argv, int argc)
 		printf("Error: number of philosophers must be greater than 0\n");
 		exit(1);
 	}
+	game->args.num_not_satifyed = game->args.num_philo - 1;
+	game->args.died = 0;
 }
 
 void	init_philos(t_philosophizing *game) {
@@ -35,7 +35,6 @@ void	init_philos(t_philosophizing *game) {
 
 	a = 0;
 	while (a < game->args.num_philo) {
-		game->philo[a]->action = THINK;
 		game->philo[a]->args = &game->args;
 		game->philo[a]->index = a;
 		game->philo[a]->eats = 0;
@@ -44,10 +43,18 @@ void	init_philos(t_philosophizing *game) {
 			game->args.num_philo];
 		game->philo[a]->m_forks[1] = game->m_forks[a % game->args.num_philo];
 		game->philo[a]->m_forks[2] = NULL;
-		game->philo[a]->last_eat = 0;
+		game->philo[a]->last_eat = game->args.start;
 		a++;
 	}
 }
+
+// void	init_monitor(t_philosophers *game) {
+// 	game->monito.t_die game->args.t_die;
+// 	pthread_mutex_init(&game->monitor.lock_eat, NULL);
+// 	game->monitor.last_eat = game->monitor.start;
+// 	game->monitor.num_not_satifyed = game->args.num_philo;
+// 	game->monitor.le_index = 0;
+// }
 
 void	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 {
@@ -55,6 +62,7 @@ void	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 
 	a = -1;
 	init_args(game, argv, argc);
+	// init_monitor(game);
 	game->philo = malloc((game->args.num_philo) * sizeof(t_philosophers *));
 	game->m_forks = malloc(game->args.num_philo * sizeof(t_mutex *));
 	game->threads = malloc(game->args.num_philo * sizeof(pthread_t *));
@@ -67,5 +75,6 @@ void	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 	while(++a < game->args.num_philo)
 		pthread_mutex_init(game->m_forks[a], NULL);
 	game->threads = malloc(game->args.num_philo * sizeof(pthread_t));
+	game->args.start = current_timestamp();
 	init_philos(game);
 }
