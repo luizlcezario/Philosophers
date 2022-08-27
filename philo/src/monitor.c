@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/26 23:47:45 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:22:45 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*monitor_routine(void *tmp)
 	a = -1;
 	monitor = (t_philosophers **)tmp;
 	args = monitor[0]->args;
+	printf("%d\n", args->died);
 	while (args->died == 0 && args->num_not_satifyed != 0) {
 		while (a < args->num_philo) {
 			if ((current_timestamp() - args->start) - monitor[a]->last_eat >
@@ -49,8 +50,9 @@ void	*monitor_routine(void *tmp)
 				args->died = 1;
 			}
 			if (monitor[a]->eats == args->t_eat_end)
+				args->num_not_satifyed--;
+			if (args->num_not_satifyed == 0)
 			{
-				args->num_not_satifyed++;
 				print_action(DINNER_OVER, monitor[a]);
 				break ;
 			}
