@@ -1,8 +1,8 @@
 NAME = philo
 CC = gcc
 INCLUDE = -pthread -I include
-CFLAGS = -Wall -Werror -Wextra
-SRC = init_philo.c main.c philo.c utils.c monitor.c routines.c
+CFLAGS = -Wall -Werror -Wextra 
+SRC = init_philo.c main.c philo.c utils.c end.c monitor.c routines.c
 SOURCE = $(addprefix src/, $(SRC))
 OBJDIR = obj/
 OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))
@@ -20,7 +20,8 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 test: re
-	./$(NAME) 5 500 200 200 5
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 5 500 200 200 5
+
 
 clean:
 	rm -rf $(OBJDIR)

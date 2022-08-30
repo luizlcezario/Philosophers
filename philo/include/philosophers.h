@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/27 01:00:07 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:28:38 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-
 typedef pthread_mutex_t	t_mutex;
 
 # define USING_FORK 1
@@ -30,23 +29,6 @@ typedef pthread_mutex_t	t_mutex;
 # define SLEEPING 3
 # define THINKING 4
 # define DIED 5
-
-/**
- * @brief  The main function of the program.
- * 
- * pthread_mutex_t is the type a mutex that is use to synchronize threads.
- * pthread_mutex_init initializes / pthread_mutex_destroy a mutex.
- * pthread_mutex_lock / pthread_mutex_unlock : locks a mutex is to set a part of the code to be sync.
- * 
- * pthread_t is the type of a thread to use to create a thread.
- * pthread_create creates a thread.
- * pthread_join joins a thread is similar to wait is use to wait and take the result of the routine.
- * pthread_detach
- * 
- * phtread_create() is used to create a thread.
- * 
- */
-
 # define DIE 0
 # define THINK 1
 # define EAT 2
@@ -63,7 +45,7 @@ typedef struct s_args
 	int				t_eat_end;
 	long long		start;
 	int				died;
-	// t_mutex			lock_eat;
+	t_mutex			lock_eat;
 }		t_args;
 
 typedef struct s_philosophers {
@@ -88,12 +70,13 @@ typedef struct s_philosophizing {
  * @param argv arguments of the program.
  * @param argc num	of arguments of the program.
  */
-void	init_philosophizing(t_philosophizing *game, char **argv, int argc);
-
+long long	current_timestamp(void);
+int			init_philosophizing(t_philosophizing *game, char **argv, int argc);
+void		finish_philosophizing(t_philosophizing *game);
 void		start_philo(t_philosophizing *game);
 void		*routines(void *game);
 void		mssleep(long long mile);
 void		*monitor_routine(void *tmp);
-long long	current_timestamp();
+int			ft_atoi(const char *dest);
 void		print_action(int action, t_philosophers *philo);
 #endif // PHILOSOPHERS_H
