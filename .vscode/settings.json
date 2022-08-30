@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.rmd": "markdown",
+		"*.Rmd": "rmarkdown",
+		"philosophers.h": "c",
+		"philosophers_bonus.h": "c"
+	}
+}
