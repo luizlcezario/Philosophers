@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:51:11 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/06 18:08:15 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,15 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+
 typedef pthread_mutex_t	t_mutex;
 
-# define USING_FORK 1
-# define EATING 2
-# define SLEEPING 3
-# define THINKING 4
-# define DIED 5
-# define DIE 0
-# define THINK 1
-# define EAT 2
+# define DINNER_OVER 0
+# define DIE 1
+# define THINK 2
 # define SLEEP 3
 # define FORK 4 
-# define DINNER_OVER 5
+# define EAT 5
 
 typedef struct s_args
 {
