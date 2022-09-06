@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/05 17:09:20 by coder            ###   ########.fr       */
+/*   Updated: 2022/09/06 18:08:41 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,24 @@
 
 # include <string.h>
 # include <errno.h>
-# include <pthread.h>
 # include <semaphore.h>
+# include <sys/wait.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
 
 typedef pthread_mutex_t	t_mutex;
 
-# define USING_FORK 1
-# define EATING 2
-# define SLEEPING 3
-# define THINKING 4
-# define DIED 5
-# define DIE 0
-# define THINK 1
-# define EAT 2
+# define THINK 2
+# define DIE 1
+# define EAT 5
 # define SLEEP 3
 # define FORK 4 
-# define DINNER_OVER 5
+# define DINNER_OVER 0
 
 typedef struct s_args
 {
@@ -45,7 +43,7 @@ typedef struct s_args
 	int				t_eat_end;
 	long long		start;
 	int				died;
-	sem_t			lock_eat;
+	sem_t			*lock_eat;
 }		t_args;
 
 typedef struct s_philosophers {
@@ -74,7 +72,7 @@ long long	current_timestamp(void);
 int			init_philosophizing(t_philosophizing *game, char **argv, int argc);
 void		finish_philosophizing(t_philosophizing *game);
 void		start_philo(t_philosophizing *game);
-void		*routines(void *game);
+void		routines(void *game);
 void		mssleep(long long mile);
 void		*monitor_routine(void *tmp);
 int			ft_atoi(const char *dest);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/05 17:12:28 by coder            ###   ########.fr       */
+/*   Updated: 2022/09/06 17:34:23 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 static int	end_dinner(t_philosophers *philo)
 {
+	if ((current_timestamp() - philo->args->start) - philo->last_eat
+		> philo->args->t_die)
+	{
+		philo->args->died = philo->index;
+		print_action(DIE, philo);
+		exit(1);
+	}
 	if (philo->args->died != 0)
-		return (DIE);
+		exit (DIE);
 	if (philo->eats == philo->args->t_eat_end)
-		return (EAT);
+		exit (DINNER_OVER);
 	return (0);
 }
 
@@ -50,7 +57,7 @@ void	think(t_philosophers *philo)
 	usleep(200);
 }
 
-void	*routines(void *tmp)
+void	routines(void *tmp)
 {
 	t_philosophers	*philo;
 
@@ -65,5 +72,5 @@ void	*routines(void *tmp)
 			break ;
 		think(philo);
 	}
-	return (NULL);
+	exit(-1);
 }

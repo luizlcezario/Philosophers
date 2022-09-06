@@ -1,7 +1,7 @@
 NAME = philo
 CC = gcc
 INCLUDE = -pthread -I include
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g3
 SRC = init_philo_bonus.c main.c philo_bonus.c utils_bonus.c end_bonus.c monitor_bonus.c routines_bonus.c
 SOURCE = $(addprefix src/, $(SRC))
 OBJDIR = obj/
