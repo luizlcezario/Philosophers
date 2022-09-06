@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:53:00 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:12:28 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static int	end_dinner(t_philosophers *philo)
 
 static int	try_eat(t_philosophers *philo)
 {
-	pthread_mutex_lock(philo->m_forks[0]);
-	pthread_mutex_lock(philo->m_forks[1]);
+	sem_wait(philo->m_forks[0]);
+	sem_wait(philo->m_forks[1]);
 	if (end_dinner(philo))
 		return (0);
 	print_action(FORK, philo);
 	print_action(FORK, philo);
 	print_action(EAT, philo);
-	philo->eats++;
 	mssleep(philo->args->t_eat);
-	pthread_mutex_unlock(philo->m_forks[1]);
-	pthread_mutex_unlock(philo->m_forks[0]);
+	philo->eats++;
+	sem_post(philo->m_forks[1]);
+	sem_post(philo->m_forks[0]);
 	return (1);
 }
 

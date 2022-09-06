@@ -19,9 +19,11 @@ $(OBJ): $(OBJDIR) $(SOURCE)
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
+test2: re
+	./$(NAME) 5 500 200 200 5
+
 test: re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 5 500 200 200 5
-
 
 clean:
 	rm -rf $(OBJDIR)

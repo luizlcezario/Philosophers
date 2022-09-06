@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:52:56 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:59:07 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_action(int action, t_philosophers *philo)
 {
 	long long	time;
 
-	pthread_mutex_lock(&philo->args->lock_eat);
+	sem_wait(&philo->args->lock_eat);
 	time = current_timestamp() - philo->args->start;
 	if (action == THINK)
 		printf("%lli %i is thinking\n", time, philo->index);
@@ -30,7 +30,7 @@ void	print_action(int action, t_philosophers *philo)
 		printf("%lli %i die\n", time, philo->index);
 	else if (action == DINNER_OVER)
 		printf("%lli every one is satisfy\n", time);
-	pthread_mutex_unlock(&philo->args->lock_eat);
+	sem_post(&philo->args->lock_eat);
 }
 
 static int	verify_monitor(t_philosophers **monitor, t_args *args)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:52:51 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:03:06 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	init_args(t_philosophizing *game, char **argv, int argc)
 {
-	game->args.num_philo = atoi(argv[1]);
-	game->args.t_die = atoi(argv[2]);
-	game->args.t_eat = atoi(argv[3]);
-	game->args.t_sleep = atoi(argv[4]);
+	game->args.num_philo = ft_atoi(argv[1]);
+	game->args.t_die = ft_atoi(argv[2]);
+	game->args.t_eat = ft_atoi(argv[3]);
+	game->args.t_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		game->args.t_eat_end = atoi(argv[5]);
+		game->args.t_eat_end = ft_atoi(argv[5]);
 	else
 		game->args.t_eat_end = -1;
 	if (game->args.num_philo < 1)
@@ -28,7 +28,7 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 		return (1);
 	}
 	game->args.died = 0;
-	pthread_mutex_init(&game->args.lock_eat, NULL);
+	sem_init(&game->args.lock_eat, 0, 1);
 	return (0);
 }
 
@@ -42,7 +42,7 @@ void	init_philos(t_philosophizing *game)
 		game->philo[a]->args = &game->args;
 		game->philo[a]->index = a + 1;
 		game->philo[a]->eats = 0;
-		game->philo[a]->m_forks = malloc(3 * sizeof(t_mutex *));
+		game->philo[a]->m_forks = malloc(3 * sizeof(sem_t *));
 		game->philo[a]->m_forks[0] = game->m_forks[
 			(a + 1) % game->args.num_philo];
 		game->philo[a]->m_forks[1] = game->m_forks[a % game->args.num_philo];
@@ -59,16 +59,16 @@ int	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 	if (a)
 		return (1);
 	game->philo = malloc(game->args.num_philo * sizeof(t_philosophers *));
-	game->m_forks = malloc(game->args.num_philo * sizeof(t_mutex *));
+	game->m_forks = malloc(game->args.num_philo * sizeof(sem_t *));
 	a = -1;
 	while (++a < game->args.num_philo)
 	{
 		game->philo[a] = malloc(sizeof(t_philosophers));
-		game->m_forks[a] = malloc(sizeof(t_mutex));
+		game->m_forks[a] = malloc(sizeof(sem_t));
 	}
 	a = -1;
 	while (++a < game->args.num_philo)
-		pthread_mutex_init(game->m_forks[a], NULL);
+		sem_init(game->m_forks[a], 0, 1);
 	game->args.start = current_timestamp();
 	init_philos(game);
 	return (0);

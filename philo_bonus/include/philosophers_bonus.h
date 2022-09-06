@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:51:20 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:09:20 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string.h>
 # include <errno.h>
 # include <pthread.h>
+# include <semaphore.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
@@ -44,12 +45,12 @@ typedef struct s_args
 	int				t_eat_end;
 	long long		start;
 	int				died;
-	t_mutex			lock_eat;
+	sem_t			lock_eat;
 }		t_args;
 
 typedef struct s_philosophers {
-	pthread_t		thread;
-	t_mutex			**m_forks;
+	pid_t			pid;
+	sem_t			**m_forks;
 	t_args			*args;
 	int				eats;
 	int				index;
@@ -57,7 +58,7 @@ typedef struct s_philosophers {
 }	t_philosophers;
 
 typedef struct s_philosophizing {
-	t_mutex			**m_forks;
+	sem_t			**m_forks;
 	t_philosophers	**philo;
 	t_args			args;
 }	t_philosophizing;

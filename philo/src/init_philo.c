@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:37:23 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:00:38 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	init_args(t_philosophizing *game, char **argv, int argc)
 {
-	game->args.num_philo = atoi(argv[1]);
-	game->args.t_die = atoi(argv[2]);
-	game->args.t_eat = atoi(argv[3]);
-	game->args.t_sleep = atoi(argv[4]);
+	game->args.num_philo = ft_atoi(argv[1]);
+	game->args.t_die = ft_atoi(argv[2]);
+	game->args.t_eat = ft_atoi(argv[3]);
+	game->args.t_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		game->args.t_eat_end = atoi(argv[5]);
+		game->args.t_eat_end = ft_atoi(argv[5]);
 	else
 		game->args.t_eat_end = -1;
 	if (game->args.num_philo < 1)

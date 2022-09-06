@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:22:49 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:52:48 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:05:38 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	finish_philosophizing(t_philosophizing *game)
 	i = -1;
 	while (++i < game->args.num_philo)
 	{
-		pthread_mutex_destroy(game->m_forks[i]);
+		sem_destroy(game->m_forks[i]);
 		free_ptr((void **)&game->m_forks[i]);
 		free_ptr((void **)&game->philo[i]->m_forks);
 		free_ptr((void **)&game->philo[i]);
 	}
-	pthread_mutex_destroy(&game->args.lock_eat);
+	sem_destroy(&game->args.lock_eat);
 	free_ptr((void **)&game->m_forks);
 	free_ptr((void **)&game->philo);
 }

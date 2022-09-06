@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:39:51 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:39:37 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:05:46 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,4 @@ void	start_philo(t_philosophizing *game)
 	while (++a < game->args.num_philo)
 		pthread_join(game->philo[a]->thread, NULL);
 	pthread_join(monitor, NULL);
-	a = -1;
-	while (++a < game->args.num_philo)
-		pthread_mutex_destroy(game->m_forks[a]);
 }
