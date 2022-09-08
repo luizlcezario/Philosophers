@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/06 18:08:15 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:14:06 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-
 
 typedef pthread_mutex_t	t_mutex;
 
@@ -74,4 +73,5 @@ void		mssleep(long long mile);
 void		*monitor_routine(void *tmp);
 int			ft_atoi(const char *dest);
 void		print_action(int action, t_philosophers *philo);
+void		dinner_alone(t_philosophers *philo);
 #endif // PHILOSOPHERS_H

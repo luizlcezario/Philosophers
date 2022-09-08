@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/05 17:00:38 by coder            ###   ########.fr       */
+/*   Updated: 2022/09/08 16:13:54 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_philos(t_philosophizing *game)
 			(a + 1) % game->args.num_philo];
 		game->philo[a]->m_forks[1] = game->m_forks[a % game->args.num_philo];
 		game->philo[a]->m_forks[2] = NULL;
-		game->philo[a]->last_eat = game->args.start;
+		game->philo[a]->last_eat = 0;
 	}
 }
 
@@ -69,7 +69,6 @@ int	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 	a = -1;
 	while (++a < game->args.num_philo)
 		pthread_mutex_init(game->m_forks[a], NULL);
-	game->args.start = current_timestamp();
 	init_philos(game);
 	return (0);
 }

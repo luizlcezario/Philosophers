@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:35:56 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:00:09 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	verify_monitor(t_philosophers **monitor, t_args *args)
 		{
 			print_action(DIE, monitor[a]);
 			args->died = 1;
+			break ;
 		}
 		if (monitor[a]->eats == args->t_eat_end)
 			num_not_satifyed--;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:39:51 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/05 17:05:46 by coder            ###   ########.fr       */
+/*   Updated: 2022/09/08 16:12:40 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	start_philo(t_philosophizing *game)
 	int			a;
 
 	a = -1;
+	game->args.start = current_timestamp();
 	while (++a < game->args.num_philo)
 		pthread_create(&game->philo[a]->thread, NULL, &routines,
 			(void *)game->philo[a]);

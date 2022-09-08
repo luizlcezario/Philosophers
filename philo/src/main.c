@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 21:59:09 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/08/30 18:39:43 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:38:51 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_philosophizing	game;
 	int					i;
 
-	if (argc > 5 && argc < 7)
+	if (argc == 5 || argc == 6)
 	{
 		i = init_philosophizing(&game, argv, argc);
 		if (i == 1)
