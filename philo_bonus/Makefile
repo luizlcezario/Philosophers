@@ -20,11 +20,13 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 test2: re
-	./$(NAME) 5 500 200 200 5
+	valgrind ./$(NAME) 5 500 500 200 5
 
 test: re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 5 500 200 200 5
 
+test3: re
+	./$(NAME) 1 500 500 600
 
 clean:
 	rm -rf $(OBJDIR)

@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/06 18:08:41 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:50:12 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_args
 	long long		start;
 	int				died;
 	sem_t			*lock_eat;
+	sem_t			*lock_print;
 }		t_args;
 
 typedef struct s_philosophers {
@@ -74,7 +75,8 @@ void		finish_philosophizing(t_philosophizing *game);
 void		start_philo(t_philosophizing *game);
 void		routines(void *game);
 void		mssleep(long long mile);
-void		*monitor_routine(void *tmp);
 int			ft_atoi(const char *dest);
 void		print_action(int action, t_philosophers *philo);
+void		dinner_alone(t_philosophers *philo);
+
 #endif // PHILOSOPHERS_H

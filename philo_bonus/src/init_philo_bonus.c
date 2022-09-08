@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/06 18:07:36 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:48:49 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 		return (1);
 	}
 	game->args.died = 0;
-	game->args.lock_eat = sem_open("/lock_print", O_CREAT, 0777, 1);
+	game->args.lock_print = sem_open("/lock_print", O_CREAT, 0777, 1);
+	game->args.lock_eat = sem_open("/lock_eat", O_CREAT, 0777, 1);
 	return (0);
 }
 
@@ -57,11 +58,11 @@ int	init_philosophizing(t_philosophizing *game, char **argv, int argc)
 
 	sem_unlink("/forks");
 	sem_unlink("/lock_print");
+	sem_unlink("/lock_eat");
 	a = init_args(game, argv, argc);
 	if (a)
 		return (1);
 	game->philo = malloc(game->args.num_philo * sizeof(t_philosophers *));
-	game->m_forks = malloc(game->args.num_philo * sizeof(sem_t *));
 	a = -1;
 	while (++a < game->args.num_philo)
 		game->philo[a] = malloc(sizeof(t_philosophers));
