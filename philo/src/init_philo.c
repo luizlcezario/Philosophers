@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/08 16:13:54 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:56:23 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 	}
 	game->args.died = 0;
 	pthread_mutex_init(&game->args.lock_eat, NULL);
+	pthread_mutex_init(&game->args.lock_print, NULL);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/08 16:14:06 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:56:00 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_args
 	long long		start;
 	int				died;
 	t_mutex			lock_eat;
+	t_mutex			lock_print;
 }		t_args;
 
 typedef struct s_philosophers {
