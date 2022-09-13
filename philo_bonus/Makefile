@@ -1,4 +1,4 @@
-NAME = philo
+NAME = philo_bonus
 CC = gcc
 INCLUDE = -pthread -I include
 CFLAGS = -Wall -Werror -Wextra -g3
@@ -20,10 +20,10 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 test2: re
-	valgrind ./$(NAME) 5 500 500 200 5
+	./$(NAME) 4 310 200 100 7
 
 test: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 5 500 200 200 5
+	 ./$(NAME) 4 399 200 200 7
 
 test3: re
 	./$(NAME) 1 500 500 600

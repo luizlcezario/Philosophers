@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:27:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/08 16:21:36 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:00:58 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ int	ft_atoi(const char *dest)
 	return (num * sign);
 }
 
-void	dinner_alone(t_philosophers *philo)
+void	dinner_alone(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->m_forks[0]);
 	print_action(FORK, philo);
 	mssleep(philo->args->t_die);
 	sem_post(philo->m_forks[0]);
+	print_action(DIE, philo);
+	exit_philo(DIE, philo, game);
 }
