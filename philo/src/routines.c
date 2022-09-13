@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 12:03:16 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:17:41 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	try_eat(t_philosophers *philo)
 	pthread_mutex_lock(philo->m_forks[1]);
 	if (end_dinner(philo) != 0)
 		return (0);
-
 	print_action(FORK, philo);
 	print_action(FORK, philo);
 	print_action(EAT, philo);
@@ -69,7 +68,7 @@ void	*routines(void *tmp)
 		else
 			break ;
 		if (end_dinner(philo) == 0)
-		think(philo);
+			think(philo);
 	}
 	return (NULL);
 }

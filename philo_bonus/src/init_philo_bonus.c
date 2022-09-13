@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 11:48:02 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:18:16 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	init_args(t_philosophizing *game, char **argv, int argc)
 {
-	t_args *args;
-	
+	t_args	*args;
+
 	args = malloc(1 * sizeof(t_args));
 	game->args = args;
 	game->args->num_philo = ft_atoi(argv[1]);

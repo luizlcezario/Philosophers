@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 11:56:44 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:18:26 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,26 @@
 static int	end_dinner(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->args->lock_print);
+	usleep(500);
 	if (philo->args->died != 0)
-	{
-		sem_post(philo->args->lock_print);
 		exit_philo(DIE, philo, game);
-	}
-	if (philo->eats == philo->args->t_eat_end)
-	{
-		sem_post(philo->args->lock_print);
+	else if (philo->eats == philo->args->t_eat_end)
 		exit_philo(DINNER_OVER, philo, game);
-	}
-	if (((current_timestamp() - game->args->start) - philo->last_eat
+	else if (((current_timestamp() - game->args->start) - philo->last_eat
 			> game->args->t_die) && philo->eats != game->args->t_eat_end)
 	{
 		philo->args->died = DIE;
 		print_action(DIE, philo);
-		sem_post(philo->args->lock_print);
 		exit_philo(1, philo, game);
 	}
-	
+	if ((current_timestamp() - game->args->start) - philo->last_eat
+		+ philo->args->t_eat > game->args->t_die
+		&& philo->eats != game->args->t_eat_end)
+	{
+		philo->args->died = DIE;
+		print_action(DIE, philo);
+		exit_philo(1, philo, game);
+	}
 	sem_post(philo->args->lock_print);
 	return (0);
 }
