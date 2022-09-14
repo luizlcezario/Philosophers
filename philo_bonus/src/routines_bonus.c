@@ -15,7 +15,7 @@
 static int	end_dinner(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->args->lock_print);
-	usleep(500);
+	usleep(200);
 	if (philo->args->died != 0)
 		exit_philo(DIE, philo, game);
 	else if (philo->eats == philo->args->t_eat_end)

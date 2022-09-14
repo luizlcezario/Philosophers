@@ -63,7 +63,7 @@ static int	verify_monitor(t_philosophers **monitor, t_args *args)
 	num_not_satifyed = monitor[0]->args->num_philo;
 	while (args->died == 0 && num_not_satifyed != 0)
 	{
-		usleep(100);
+		usleep(300);
 		a = verify_death(monitor, args);
 		if (a == -1)
 			return (-1);

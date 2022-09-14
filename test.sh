@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## PATH VARS
-BIN_PATH=philo_bonus/philo_bonus
-MAKEFILE_PATH=philo_bonus
+BIN_PATH=philo/philo
+MAKEFILE_PATH=philo
 ## UNCOMMENT BONUS TESTS IF NEEDED
 # BONUS_BIN_PATH=philo_bonus/philo_bonus
 # BONUS_MAKEFILE_PATH=philo_bonus
