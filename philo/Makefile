@@ -1,29 +1,36 @@
-NAME = philo
-CC = gcc
-INCLUDE = -pthread -I include
-CFLAGS = -Wall -Werror -Wextra 
-SRC = init_philo.c main.c philo.c utils.c end.c monitor.c routines.c
-SOURCE = $(addprefix src/, $(SRC))
-OBJDIR = obj/
-OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))
+NAME		= philo
+HEADER		= -I ./include/
+SRCDIR		= srcs
+SOURCES		= main.c end.c philo.c utils.c routines.c monitor.c init_philo.c 
+SRCS		= $(addprefix $(SRCDIR)/, $(SOURCES))
+
+OBJDIR		= objs
+OBJS		= $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+GCC			= clang
+CFLAGS		= -g3 -Wall -Werror -Wextra
+RM			= rm -rf
+VAL			= valgrind -s --tool=helgrind 
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) -o $(NAME)
+$(NAME): $(OBJDIR) $(OBJS) 
+	$(GCC) $(OBJS) $(HEADER) -o $@ -lpthread
 
-$(OBJ): $(OBJDIR) $(SOURCE)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $(SOURCE)
-	mv $(notdir ,$(OBJ)) $(OBJDIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(GCC) -c $(CFLAGS) $(HEADER) $< -o $@
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
 clean:
-	rm -rf $(OBJDIR)
+	$(RM) $(OBJDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
+
+test: re
+	$(VAL) ./$(NAME) 5 310 200 100
 
 re: fclean all
 

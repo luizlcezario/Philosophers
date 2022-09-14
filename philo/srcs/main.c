@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 21:59:09 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/08 15:38:51 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:46:35 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	else
-		perror("\033[0;31mError: wrong arguments\n\033[0;30m");
+		perror("\033[0;31mError: wrong arguments\n\033[0;0m");
 	return (1);
 }
