@@ -10,7 +10,7 @@ OBJS		= $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 GCC			= clang
 CFLAGS		= -g3 -Wall -Werror -Wextra
 RM			= rm -rf
-VAL			= valgrind -s --tool=helgrind 
+VAL			= valgrind --tool=helgrind --history-level=approx
 
 all: $(NAME)
 

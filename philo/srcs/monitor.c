@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/10 18:21:48 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/15 02:31:53 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ static int	verify_monitor(t_philosophers **monitor, t_args *args)
 		num_not_satifyed = args->num_philo;
 		while (a < monitor[0]->args->num_philo)
 		{
+			pthread_mutex_lock(&args->lock_eat);
 			if (monitor[a]->eats == args->t_eat_end)
 				num_not_satifyed--;
+			pthread_mutex_unlock(&args->lock_eat);
 			a++;
 		}
 	}

@@ -2,7 +2,7 @@ NAME = philo_bonus
 CC = gcc
 INCLUDE = -pthread -I include
 CFLAGS = -Wall -Werror -Wextra -g3
-SRC = init_philo_bonus.c main.c philo_bonus.c utils_bonus.c end_bonus.c monitor_bonus.c routines_bonus.c
+SRC = init_philo_bonus.c main_bonus.c philo_bonus.c utils_bonus.c end_bonus.c monitor_bonus.c routines_bonus.c
 SOURCE = $(addprefix src/, $(SRC))
 OBJDIR = obj/
 OBJ =  $(addprefix $(OBJDIR), $(SRC:.c=.o))

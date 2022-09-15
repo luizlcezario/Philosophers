@@ -6,35 +6,35 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:27:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/12 15:00:58 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:59:19 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-long long	current_timestamp(void)
+long long current_timestamp(void)
 {
-	struct timeval	te;
-	long long		milliseconds;
+	struct timeval te;
+	long long milliseconds;
 
 	gettimeofday(&te, NULL);
 	milliseconds = te.tv_sec * 1000LL + te.tv_usec / 1000;
 	return (milliseconds);
 }
 
-void	mssleep(long long mile)
+void mssleep(long long mile)
 {
-	long long	microsec;
+	long long microsec;
 
 	microsec = mile * 1000;
 	usleep(microsec);
 }
 
-int	ft_atoi(const char *dest)
+int ft_atoi(const char *dest)
 {
-	int	sign;
-	int	num;
-	int	a;
+	int sign;
+	int num;
+	int a;
 
 	a = 0;
 	if (*dest == 0)
@@ -58,12 +58,7 @@ int	ft_atoi(const char *dest)
 	return (num * sign);
 }
 
-void	dinner_alone(t_philosophers *philo, t_philosophizing *game)
+int time(long long t)
 {
-	sem_wait(philo->m_forks[0]);
-	print_action(FORK, philo);
-	mssleep(philo->args->t_die);
-	sem_post(philo->m_forks[0]);
-	print_action(DIE, philo);
-	exit_philo(DIE, philo, game);
+	return (current_timestamp() - t);
 }
