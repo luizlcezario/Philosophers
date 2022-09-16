@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/15 19:13:11 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:09:05 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static int end_dinner(t_philosophers *philo)
 
 static int try_eat(t_philosophers *philo)
 {
-	pthread_mutex_lock(philo->m_forks[1]);
 	pthread_mutex_lock(philo->m_forks[0]);
+	pthread_mutex_lock(philo->m_forks[1]);
 	if (end_dinner(philo) != 0)
 	{
-		pthread_mutex_unlock(philo->m_forks[1]);
 		pthread_mutex_unlock(philo->m_forks[0]);
+		pthread_mutex_unlock(philo->m_forks[1]);
 		return (0);
 	}
 	print_action(FORK, philo);
@@ -47,8 +47,8 @@ static int try_eat(t_philosophers *philo)
 	philo->last_eat = current_timestamp() - philo->args->start;
 	pthread_mutex_unlock(&philo->args->lock_eat);
 	mssleep(philo->args->t_eat);
-	pthread_mutex_unlock(philo->m_forks[1]);
 	pthread_mutex_unlock(philo->m_forks[0]);
+	pthread_mutex_unlock(philo->m_forks[1]);
 	return (1);
 }
 

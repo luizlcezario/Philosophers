@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/15 19:30:08 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:05:22 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int end_dinner(t_philosophers *philo, t_philosophizing *game)
 
 static int try_eat(t_philosophers *philo, t_philosophizing *game)
 {
-	sem_wait(philo->m_forks[1]);
 	sem_wait(philo->m_forks[0]);
+	sem_wait(philo->m_forks[1]);
 	if (end_dinner(philo, game) != 0)
 	{
-		sem_wait(philo->m_forks[1]);
 		sem_wait(philo->m_forks[0]);
+		sem_wait(philo->m_forks[1]);
 		return (0);
 	}
 	print_action(FORK, philo);
@@ -56,8 +56,8 @@ static int try_eat(t_philosophers *philo, t_philosophizing *game)
 	}
 	sem_post(philo->args->lock_print);
 	mssleep(philo->args->t_eat);
-	sem_post(philo->m_forks[1]);
 	sem_post(philo->m_forks[0]);
+	sem_post(philo->m_forks[1]);
 	return (1);
 }
 

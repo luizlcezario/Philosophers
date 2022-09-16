@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/15 18:47:14 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:16:32 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void init_philos(t_philosophizing *game)
 		game->philo[a]->m_forks = malloc(3 * sizeof(t_mutex *));
 		game->philo[a]->m_forks[0] = game->m_forks[a];
 		game->philo[a]->m_forks[1] = game->m_forks[(a + 1) % game->args.num_philo];
+		if ((a + 1) % game->args.num_philo == 0)
+		{
+			game->philo[a]->m_forks[1] = game->philo[a]->m_forks[0];
+			game->philo[a]->m_forks[0] = game->m_forks[0];
+		}
 		game->philo[a]->m_forks[2] = NULL;
 		game->philo[a]->last_eat = 0;
 	}
