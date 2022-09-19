@@ -6,13 +6,13 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/16 20:09:05 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:39:44 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int end_dinner(t_philosophers *philo)
+static int	end_dinner(t_philosophers *philo)
 {
 	pthread_mutex_lock(&philo->args->lock_eat);
 	if (philo->args->died != 0)
@@ -29,7 +29,7 @@ static int end_dinner(t_philosophers *philo)
 	return (0);
 }
 
-static int try_eat(t_philosophers *philo)
+static int	try_eat(t_philosophers *philo)
 {
 	pthread_mutex_lock(philo->m_forks[0]);
 	pthread_mutex_lock(philo->m_forks[1]);
@@ -52,21 +52,21 @@ static int try_eat(t_philosophers *philo)
 	return (1);
 }
 
-static void philo_sleep(t_philosophers *philo)
+static void	philo_sleep(t_philosophers *philo)
 {
 	print_action(SLEEP, philo);
 	mssleep(philo->args->t_sleep);
 }
 
-static void think(t_philosophers *philo)
+static void	think(t_philosophers *philo)
 {
 	print_action(THINK, philo);
 	usleep(1000);
 }
 
-void *routines(void *tmp)
+void	*routines(void *tmp)
 {
-	t_philosophers *philo;
+	t_philosophers	*philo;
 
 	philo = (t_philosophers *)tmp;
 	if (philo->args->num_philo == 1)
@@ -78,7 +78,7 @@ void *routines(void *tmp)
 		if (try_eat(philo) == 1 && end_dinner(philo) == 0)
 			philo_sleep(philo);
 		else
-			break;
+			break ;
 		if (end_dinner(philo) == 0)
 			think(philo);
 	}

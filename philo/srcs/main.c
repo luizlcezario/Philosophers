@@ -6,16 +6,16 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 21:59:09 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/19 19:03:53 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:40:29 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_philosophizing game;
-	int i;
+	t_philosophizing	game;
+	int					i;
 
 	if (argc == 5 || argc == 6)
 	{

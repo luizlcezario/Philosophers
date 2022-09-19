@@ -6,15 +6,15 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:12:59 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/19 20:33:54 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:42:20 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void print_action(int action, t_philosophers *philo)
+void	print_action(int action, t_philosophers *philo)
 {
-	long long timing;
+	long long	timing;
 
 	timing = time(philo->args->start);
 	sem_wait(philo->args->lock_eat);
@@ -33,7 +33,7 @@ void print_action(int action, t_philosophers *philo)
 	sem_post(philo->args->lock_eat);
 }
 
-void dinner_alone(t_philosophers *philo, t_philosophizing *game)
+void	dinner_alone(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->m_forks[0]);
 	print_action(FORK, philo);

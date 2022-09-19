@@ -6,13 +6,13 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/19 20:26:26 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:44:22 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-static int end_dinner(t_philosophers *philo, t_philosophizing *game)
+static int	end_dinner(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->args->lock_print);
 	if (philo->args->died != 0)
@@ -30,7 +30,7 @@ static int end_dinner(t_philosophers *philo, t_philosophizing *game)
 	return (0);
 }
 
-static int try_eat(t_philosophers *philo, t_philosophizing *game)
+static int	try_eat(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->m_forks[0]);
 	sem_wait(philo->m_forks[1]);
@@ -53,19 +53,19 @@ static int try_eat(t_philosophers *philo, t_philosophizing *game)
 	return (1);
 }
 
-static void philo_sleep(t_philosophers *philo,  t_philosophizing *game)
+static void	philo_sleep(t_philosophers *philo, t_philosophizing *game)
 {
 	print_action(SLEEP, philo);
-	phsleep(philo->args->t_sleep, philo , game);
+	phsleep(philo->args->t_sleep, philo, game);
 }
 
-void think(t_philosophers *philo)
+void	think(t_philosophers *philo)
 {
 	print_action(THINK, philo);
 	usleep(500);
 }
 
-void routines(t_philosophers *philo, t_philosophizing *game)
+void	routines(t_philosophers *philo, t_philosophizing *game)
 {
 	if (philo->args->num_philo == 1)
 		dinner_alone(philo, game);
@@ -76,7 +76,7 @@ void routines(t_philosophers *philo, t_philosophizing *game)
 		if (try_eat(philo, game) == 1 && end_dinner(philo, game) == 0)
 			philo_sleep(philo, game);
 		if (end_dinner(philo, game) != 0)
-			break;
+			break ;
 		think(philo);
 		wait_forks(philo, game);
 	}

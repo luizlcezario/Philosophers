@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/19 19:22:05 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:42:04 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 	game->args->t_eat_end = 1;
 	if (argc == 6)
 		game->args->t_eat_end = ft_atoi(argv[5]);
-	else if (game->args->num_philo < 1 || game->args->t_die < 40 || game->args->t_eat
-		< 40 || game->args->t_sleep < 40 || game->args->t_eat_end < 1)
+	else if (game->args->num_philo < 1 || game->args->t_die < 40
+		|| game->args->t_eat < 40 || game->args->t_sleep < 40
+		|| game->args->t_eat_end < 1)
 	{
 		printf("\033[0;31mPlease check the input numbers!\n : ERROR\033[0m\n");
 		return (1);
