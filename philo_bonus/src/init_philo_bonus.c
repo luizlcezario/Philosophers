@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 12:18:16 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:10:59 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 		game->args->t_eat_end = ft_atoi(argv[5]);
 	else
 		game->args->t_eat_end = -1;
-	if (game->args->num_philo < 1)
+	if (game->args.num_philo < 1 || game->args.t_die < 40 || game->args.t_eat
+		< 40 || game->args.t_sleep < 40 || game->args.t_eat_end < 1)
 	{
 		printf("Error: number of philosophers must be greater than 0\n");
 		return (1);

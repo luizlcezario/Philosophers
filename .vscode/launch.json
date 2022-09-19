@@ -8,9 +8,15 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "${workspaceFolder}/philo_bonus/philo",
-			"args": [ "5", "500" ,"200" ,"200" ,"5"],
-			"cwd": "${workspaceFolder}/philo_bonus"
+			"program": "${workspaceFolder}/philo/philo",
+			"args": [
+				"-1",
+				"500",
+				"200",
+				"200",
+				"5"
+			],
+			"cwd": "${workspaceFolder}/philo"
 		}
 	]
 }

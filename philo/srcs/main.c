@@ -6,16 +6,16 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 21:59:09 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/14 17:46:35 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:03:53 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_philosophizing	game;
-	int					i;
+	t_philosophizing game;
+	int i;
 
 	if (argc == 5 || argc == 6)
 	{
@@ -27,6 +27,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	else
-		perror("\033[0;31mError: wrong arguments\n\033[0;0m");
+		printf("\033[0;31mWrong arguments\n : ERROR\033[0m\n");
 	return (1);
 }
