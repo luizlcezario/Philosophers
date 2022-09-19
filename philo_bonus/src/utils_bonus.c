@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:27:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/15 18:59:19 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:31:36 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,25 @@ int ft_atoi(const char *dest)
 int time(long long t)
 {
 	return (current_timestamp() - t);
+}
+
+void	phsleep(int rest, t_philosophers *philo, t_philosophizing *game)
+{
+	long long	current_time;
+	long long	start_time;
+
+	start_time = current_timestamp();
+	while (time(start_time) < (long long) rest)
+	{
+		current_time = time(game->args->start);
+		sem_wait(philo->args->lock_print);
+		if ((current_time - philo->last_eat) > philo->args->t_die)
+		{
+			philo->args->died = DIE;
+			print_action(DIE, philo);
+			exit_philo(1, philo, game);
+		}
+		usleep(200);
+		sem_post(philo->args->lock_print);
+	}
 }

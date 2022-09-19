@@ -30,7 +30,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 test: re
-	$(VAL) ./$(NAME) 5 310 200 100
+	./$(NAME) 4 399 200 200 7
 
 re: fclean all
 

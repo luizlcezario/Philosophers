@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:28:58 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/15 18:59:35 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:10:35 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,20 @@ typedef struct s_philosophizing
  * @param argv arguments of the program.
  * @param argc num	of arguments of the program.
  */
-long long current_timestamp(void);
-int init_philosophizing(t_philosophizing *game, sem_t *forks,
+long long	current_timestamp(void);
+int			init_philosophizing(t_philosophizing *game, sem_t *forks,
 						char **argv, int argc);
-void finish_philosophizing(t_philosophizing *game);
-void start_philo(t_philosophizing *game);
-void routines(t_philosophers *philo, t_philosophizing *game);
-void mssleep(long long mile);
-int ft_atoi(const char *dest);
-void print_action(int action, t_philosophers *philo);
-void dinner_alone(t_philosophers *philo, t_philosophizing *game);
-void free_ptr(void **ptr);
-void exit_philo(int exit, t_philosophers *philo, t_philosophizing *game);
-int time(long long t);
+void		finish_philosophizing(t_philosophizing *game);
+void		start_philo(t_philosophizing *game);
+void		routines(t_philosophers *philo, t_philosophizing *game);
+void		mssleep(long long mile);
+int			ft_atoi(const char *dest);
+void		print_action(int action, t_philosophers *philo);
+void		dinner_alone(t_philosophers *philo, t_philosophizing *game);
+void		free_ptr(void **ptr);
+void		exit_philo(int exit, t_philosophers *philo, t_philosophizing *game);
+int			time(long long t);
+void		phsleep(int rest, t_philosophers *philo,
+			t_philosophizing *game);
+void		wait_forks(t_philosophers *philo, t_philosophizing *game);
 #endif // PHILOSOPHERS_H

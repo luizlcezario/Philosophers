@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:39:51 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 12:18:02 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:22:31 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	start_philo(t_philosophizing *game)
 	int			a;
 
 	a = -1;
+	game->args->start = current_timestamp();
 	while (++a < game->args->num_philo)
 	{
 		game->philo[a]->pid = fork();

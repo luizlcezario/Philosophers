@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:22:49 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/13 12:13:33 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:30:42 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exit_philo(int code, t_philosophers *philo, t_philosophizing *game)
 {
 	int	i;
 
-	sem_post(philo->args->lock_print);
 	sem_close(philo->args->lock_print);
 	sem_close(philo->args->lock_eat);
 	sem_close(*game->philo[0]->m_forks);

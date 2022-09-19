@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:27:41 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/19 19:10:59 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:22:05 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ static int	init_args(t_philosophizing *game, char **argv, int argc)
 	game->args->t_die = ft_atoi(argv[2]);
 	game->args->t_eat = ft_atoi(argv[3]);
 	game->args->t_sleep = ft_atoi(argv[4]);
+	game->args->t_eat_end = 1;
 	if (argc == 6)
 		game->args->t_eat_end = ft_atoi(argv[5]);
-	else
-		game->args->t_eat_end = -1;
-	if (game->args.num_philo < 1 || game->args.t_die < 40 || game->args.t_eat
-		< 40 || game->args.t_sleep < 40 || game->args.t_eat_end < 1)
+	else if (game->args->num_philo < 1 || game->args->t_die < 40 || game->args->t_eat
+		< 40 || game->args->t_sleep < 40 || game->args->t_eat_end < 1)
 	{
-		printf("Error: number of philosophers must be greater than 0\n");
+		printf("\033[0;31mPlease check the input numbers!\n : ERROR\033[0m\n");
 		return (1);
 	}
+	else
+		game->args->t_eat_end = -1;
 	game->args->died = 0;
 	game->args->lock_print = sem_open("/lock_print", O_CREAT, 0777, 1);
 	game->args->lock_eat = sem_open("/lock_eat", O_CREAT, 0777, 1);

@@ -20,13 +20,13 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 test2: re
-	./$(NAME) 4 310 200 100 7
+	 valgrind --tool=helgrind --history-level=approx ./$(NAME) 4 310 200 100 7
 
 test: re
-	 ./$(NAME) 4 399 200 200 7
+	 valgrind --tool=helgrind --history-level=approx  ./$(NAME) 4 399 200 200 7
 
 test3: re
-	./$(NAME) 1 500 500 600
+	 valgrind --tool=helgrind --history-level=approx ./$(NAME) 1 500 500 600
 
 clean:
 	rm -rf $(OBJDIR)

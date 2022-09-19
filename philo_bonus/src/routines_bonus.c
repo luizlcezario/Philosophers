@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:14:20 by llima-ce          #+#    #+#             */
-/*   Updated: 2022/09/16 20:05:22 by llima-ce         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:26:26 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int end_dinner(t_philosophers *philo, t_philosophizing *game)
 {
 	sem_wait(philo->args->lock_print);
-	usleep(200);
 	if (philo->args->died != 0)
 		exit_philo(DIE, philo, game);
 	else if (philo->eats == philo->args->t_eat_end)
@@ -26,6 +25,7 @@ static int end_dinner(t_philosophers *philo, t_philosophizing *game)
 		print_action(DIE, philo);
 		exit_philo(1, philo, game);
 	}
+	usleep(200);
 	sem_post(philo->args->lock_print);
 	return (0);
 }
@@ -46,31 +46,23 @@ static int try_eat(t_philosophers *philo, t_philosophizing *game)
 	philo->eats++;
 	philo->last_eat = current_timestamp() - philo->args->start;
 	sem_wait(philo->args->lock_print);
-	if ((time(game->args->start) - philo->last_eat + philo->args->t_eat > game->args->t_die))
-	{
-		printf("%lld, %d\n", time(game->args->start) - philo->last_eat + philo->args->t_eat, game->args->t_die);
-		mssleep(time(game->args->start) - philo->last_eat - philo->args->t_eat + game->args->t_die);
-		philo->args->died = DIE;
-		print_action(DIE, philo);
-		exit_philo(1, philo, game);
-	}
 	sem_post(philo->args->lock_print);
-	mssleep(philo->args->t_eat);
+	phsleep(philo->args->t_eat, philo, game);
 	sem_post(philo->m_forks[0]);
 	sem_post(philo->m_forks[1]);
 	return (1);
 }
 
-static void philo_sleep(t_philosophers *philo)
+static void philo_sleep(t_philosophers *philo,  t_philosophizing *game)
 {
 	print_action(SLEEP, philo);
-	mssleep(philo->args->t_sleep);
+	phsleep(philo->args->t_sleep, philo , game);
 }
 
 void think(t_philosophers *philo)
 {
 	print_action(THINK, philo);
-	usleep(200);
+	usleep(500);
 }
 
 void routines(t_philosophers *philo, t_philosophizing *game)
@@ -82,10 +74,11 @@ void routines(t_philosophers *philo, t_philosophizing *game)
 	while (end_dinner(philo, game) == 0 && philo->args->num_philo != 1)
 	{
 		if (try_eat(philo, game) == 1 && end_dinner(philo, game) == 0)
-			philo_sleep(philo);
+			philo_sleep(philo, game);
 		if (end_dinner(philo, game) != 0)
 			break;
 		think(philo);
+		wait_forks(philo, game);
 	}
 	exit_philo(DIE, philo, game);
 }
